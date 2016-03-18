@@ -15,9 +15,9 @@
 
 <script>
 mapLink = '<a href="http://openstreetmap.org">openstreetmap</a>,'+'<a href="http://mapsnigeriainitiative.wordpress.com">mapsNI</a>';
- var base = L.tileLayer('https://api.tiles.mapbox.com/v4/mapbox.streets/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6IjZjNmRjNzk3ZmE2MTcwOTEwMGY0MzU3YjUzOWFmNWZhIn0.Y8bhBaUMqFiPrDRW9hieoQ',
+ var base = L.tileLayer('https://api.tiles.mapbox.com/v4/mapbox.streets/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWF5b3R1bmRlIiwiYSI6IlpFM1Jmck0ifQ.13TB14FKWB328q1q7eEZUQ',
 {attribution:' Map data &copy;' + mapLink, maxZoom: 18}),
-satellite = L.tileLayer('https://api.tiles.mapbox.com/v4/mapbox.satellite/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6IjZjNmRjNzk3ZmE2MTcwOTEwMGY0MzU3YjUzOWFmNWZhIn0.Y8bhBaUMqFiPrDRW9hieoQ',
+satellite = L.tileLayer('https://api.tiles.mapbox.com/v4/mapbox.satellite/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWF5b3R1bmRlIiwiYSI6IlpFM1Jmck0ifQ.13TB14FKWB328q1q7eEZUQ',
 {attribution:' Map data &copy;' + mapLink, maxZoom: 18});
 var icon = L.icon({ iconUrl: 'https://cdn.rawgit.com/mayotunde/dell/master/college.png', iconSize: [30, 30]}); 
 var facilities = L.layerGroup();
