@@ -1,72 +1,136 @@
-<!doctype html>
-<html>
 <head>
-  <meta charset=utf-8 />
-  <title>Graduated Symbol Sizes using geojson point features</title>
-  <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
-    <link rel="stylesheet" href="https://npmcdn.com/leaflet@0.7.7/dist/leaflet.css" />
-  <script src="https://npmcdn.com/leaflet@0.7.7/dist/leaflet.js"></script>
-    <script src='https://code.jquery.com/jquery-3.1.0.min.js'></script>
-  </head>
-<style>
-.legend label,
-.legend span {
-  display:block;
-  float:left;
-  height:15px;
-  width:30%;
-  text-align:center;
-  font-size:9px;
-  color:#808080;
-  }
-</style>
-<body style='background:#eeeeee'>
-
-<h3 style='font-face:Tahoma;color:#4d4d4d'> Leaflet powered web map illustrating local districts
-in the Southwest region of Nigeria(West Africa)</h3>
-<p>Districts with  a male populations of over 100000 appear in darker blue hue</p>
-<p> Click on the districts to get an info display</p>
-
-
-<div id="map" style="width: 700px; height: 450px;border:1px solid black"></div>
+<title>mapsnigeriainitiative-leaflet january</title> 
+<link rel='stylesheet' href="https://npmcdn.com/leaflet@0.7.7/dist/leaflet.css" />
+<link rel='shortcut icon' href='https://mapsnigeriainitiative.com/favicon.ico' type='image/icon'/>
+</head>
+<body style='font-family:Candara;margin-left:20px;background:#f5f5f5'>
+<h2 style='background:#4d4d4d;padding:20px;color:#fff'>Introduction to Leaflet 3<small>...............&copy; mapsnigeriainitiative2017</small></h2>
+<h2 style='color:#4d4d4d'>Adding geojson files from external source</h2><br><br>
+<div id='map' style="width:600px;height:300px;border:1px solid black;margin-left:100px">
+<script src='https://code.jquery.com/jquery-3.1.0.min.js'>
+  </script> <script src='https://npmcdn.com/leaflet@0.7.7/dist/leaflet.js'></script>
 <script>
 
-  var map = L.map('map').setView([7.634, 3.845], 6);
- 
-L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/toner-lite/{z}/{x}/{y}.png', {attribution: '<a href="https://mapsnigeriainitiative.com">mapsnigeriainitiative, 
+attribution = '<a href="https://mapsnigeriainitiative.com">mapsnigeriainitiative</a>,'+'<a href="https://osm.org">OSM</a>';
 
-mapsby Stamen maps</a>'}).addTo(map);
+var map = L.map('map').setView([4.7821, 7.0703], 12);
 
+L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", 
+{attribution: attribution, maxzoom:22}).addTo(map);
 
-function onEachFeature(feature, layer){
-if(feature.properties&&feature.properties.name_2&&feature.properties.name_1&&feature.properties.male){
-layer.bindPopup("LGName:" + feature.properties.name_2 + "<br>" + "State:" + feature.properties.name_1 + '<br>' + 'Male_pop:' + feature.properties.male);}}
+var style = {fillColor:'#99e6e6', color:'#000', fillOpacity:0.4};
 
-
-$.getJSON('https://cdn.rawgit.com/mayotunde/simple/gh-pages/southwestzone.geojson', function(data){
-
-var lg = L.geoJson(data, {onEachFeature,
-style: function(feature, latlng)
-{var fillColor,PH = feature.properties.male;
-if (PH > 100000 ) fillColor = "blue";
-else if (PH > 0 ) fillColor = "#045A8D";
-return {color:"black", fillColor: fillColor, fillOpacity: 0.5}
-}}).addTo(map);
+$.getJSON('329lakes.geojson', function(data){   
+L.geoJson(data, {style,                 //Use the L.geoJson function to draw and style the vector layer to the map
+onEachFeature:function(feature, layer)   //Use the onEachfeature function to bind popup display to each feature
+layer.bindPopup(feature.properties.name)
+}).addTo(map);  
 });
-
 </script>
+</div><br>
 
+  Geojson can store spatial and attribute properties of a feature or multiple features. It is a lightweight format that allows a user to draw
+  large vector data onto a leaflet map or web maps generally. It is a format favoured by most web mapping platforms. You can load geojson files  from an external source- that is a location outside of the script using the jquery getJSON function.<br><br>
+
+  It is simple. Make sure the geojson file is in the same folder as your jquery and html file. In your leaflet folder, you have a jquery file placed there for this practice.<br>
+  
+  Add a link to the jquery file <code><script src='jquery.min.js'></script> and use getJSON to call the geojson file.
+
+  <pre id="line1" style=background:white;width:800px'>&lt;<span class="start-tag">script</span> <span class="attribute-name">src</span>='<a class="attribute-value" href="view-source:file:///C:/Users/user/Desktop/leaflet/jquery.min.js">jquery.min.js</a>'&gt;&lt;/<span class="end-tag">script</span>&gt; <br />&lt;<span class="start-tag">script</span> <span class="attribute-name">src</span>='<a class="attribute-value" href="view-source:file:///C:/Users/user/Desktop/leaflet/leaflet.js">leaflet.js</a>'&gt;&lt;/<span class="end-tag">script</span>&gt;
+<span id="line10"></span>&lt;<span class="start-tag">script</span>&gt;
+<span id="line11"></span>
+<span id="line12"></span>attribution = '&lt;a href="https://mapsnigeriainitiative.com"&gt;mapsnigeriainitiative&lt;/a&gt;,'+'&lt;a href="https://osm.org"&gt;OSM&lt;/a&gt;';
+<span id="line13"></span>
+<span id="line14"></span>var map = L.map('map').setView([4.7821, 7.0703], 12);
+<span id="line15"></span>
+<span id="line16"></span>L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", 
+<span id="line17"></span>{attribution: attribution, maxzoom:22}).addTo(map);
+<span id="line18"></span>
+<span id="line20"></span>
+<span id="line21"></span>//Use jquery getJSON to call the geojson file into the script
+<span id="line22"></span>$.getJSON('329lakes.geojson', function(data){   
+<span id="line23"></span>L.geoJson(data).addTo(map);  //Use L.geojson to draw the features to the map
+<span id="line27"></span>});</pre>
+
+
+You can add style and bind popup display to the object loaded by the L.geojson function. Below the geojson file has multiple polygons.
+
+<pre style='background:white;width:1100px'>
+<span id="line19"></span>var style = {fillColor:'#99e6e6', color:'#000', fillOpacity:0.4};
+<span id="line20"></span>
+
+<span id="line22"></span>$.getJSON('329lakes.geojson', function(data){   
+<span id="line23"></span>L.geoJson(data, {style,                 //Use the L.geoJson function to draw and style the vector layer to the map
+<span id="line24"></span>onEachFeature:function(feature, layer)   //Use the onEachfeature function to bind popup display to each feature
+<span id="line25"></span>layer.bindPopup(feature.properties.name)
+<span id="line26"></span>}).addTo(map);  
+<span id="line27"></span>});
+<span id="line28"></span>
+<span id="line29"></span>&lt;/<span class="end-tag">script</span>&gt;
+<span id="line30"></span><span class="error" title="End tag for &ldquo;body&rdquo; seen, but there were unclosed elements.">&lt;/<span class="end-tag">body</span>&gt;</span>
+<span id="line31"></span><span class="error error" title="Saw an end tag after &ldquo;body&rdquo; had been closed.
+Stray end tag &ldquo;htnl&rdquo;.">&lt;/<span class="end-tag">htnl</span>&gt;<br /><br /></span></pre>
+<pre id="line1">var style = {fillColor:'#99e6e6', color:'#000', fillOpacity:0.4};
+<span id="line20"></span>
+<span id="line21"></span>//Use jquery getJSON to load the geojson file into the script
+<span id="line22"></span>$.getJSON('329lakes.geojson', function(data){   
+<span id="line23"></span>L.geoJson(data, {style,                 //Use the L.geoJson function to draw and style the vector layer to the map
+<span id="line24"></span>onEachFeature:function(feature, layer)   //Use the onEachfeature function to bind popup display to each feature
+<span id="line25"></span>layer.bindPopup(feature.properties.name)
+<span id="line26"></span>}).addTo(map);  
+<span id="line27"></span>});</pre>
+
+
+<p>The final code will look like this:</p>
+
+<pre style='background:white;width:1100px'><span class="doctype">&lt;!doctype html&gt;</span>
+<span id="line2"></span>&lt;<span class="start-tag">html</span>&gt;
+<span id="line3"></span>&lt;<span class="start-tag">head</span>&gt;
+<span id="line4"></span>&lt;<span class="start-tag">meta</span> <span class="attribute-name">charset</span>='<a class="attribute-value">utf-8</a>' /&gt;
+<span id="line5"></span>&lt;<span class="start-tag">link</span> <span class="attribute-name">rel</span>='<a class="attribute-value">stylesheet</a>' <span class="attribute-name">href</span>="<a class="attribute-value" href="view-source:file:///C:/Users/user/Desktop/leaflet/leaflet.css">leaflet.css</a>" /&gt;
+<span id="line6"></span>&lt;/<span class="end-tag">head</span>&gt;
+<span id="line7"></span>&lt;<span class="start-tag">body</span>&gt;
+<span id="line8"></span>&lt;<span class="start-tag">div</span> <span class="attribute-name">id</span>='<a class="attribute-value">map</a>' <span class="attribute-name">style</span>="<a class="attribute-value">width:700px;height:400px;border:1px solid black</a>"&gt;
+<span id="line9"></span>&lt;<span class="start-tag">script</span> <span class="attribute-name">src</span>='<a class="attribute-value" href="view-source:file:///C:/Users/user/Desktop/leaflet/jquery.min.js">jquery.min.js</a>'&gt;&lt;/<span class="end-tag">script</span>&gt; &lt;<span class="start-tag">script</span> <span class="attribute-name">src</span>='<a class="attribute-value" href="view-source:file:///C:/Users/user/Desktop/leaflet/leaflet.js">leaflet.js</a>'&gt;&lt;/<span class="end-tag">script</span>&gt;
+<span id="line10"></span>&lt;<span class="start-tag">script</span>&gt;
+<span id="line11"></span>
+<span id="line12"></span>attribution = '&lt;a href="https://mapsnigeriainitiative.com"&gt;mapsnigeriainitiative&lt;/a&gt;,'+'&lt;a href="https://osm.org"&gt;OSM&lt;/a&gt;';
+<span id="line13"></span>
+<span id="line14"></span>var map = L.map('map').setView([4.7821, 7.0703], 12);
+<span id="line15"></span>
+<span id="line16"></span>L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", 
+<span id="line17"></span>{attribution: attribution, maxzoom:22}).addTo(map);
+<span id="line18"></span>
+<span id="line19"></span>var style = {fillColor:'#99e6e6', color:'#000', fillOpacity:0.4};
+<span id="line20"></span>
+
+<span id="line22"></span>$.getJSON('329lakes.geojson', function(data){   
+<span id="line23"></span>L.geoJson(data, {style,                 
+<span id="line24"></span>onEachFeature:function(feature, layer)   
+<span id="line25"></span>layer.bindPopup(feature.properties.name)
+<span id="line26"></span>}).addTo(map);  
+<span id="line27"></span>});
+<span id="line28"></span>
+<span id="line29"></span>&lt;/<span class="end-tag">script</span>&gt;
+<span id="line30"></span><span class="error" title="End tag for &ldquo;body&rdquo; seen, but there were unclosed elements.">&lt;/<span class="end-tag">body</span>&gt;</span>
+<span id="line31"></span><span class="error error" title="Saw an end tag after &ldquo;body&rdquo; had been closed.
+Stray end tag &ldquo;htnl&rdquo;.">&lt;/<span class="end-tag">html</span>&gt;<br /><br /></span></pre>
+
+Copy and paste in a text editor(e.g Notepad, wordpad, sublime text) and save as
+.html file.<strong> Make sure you save the html file in the leaflet folder on your desktop</strong>.<br>
+Open the file with a modern browser. Your page should appear as map above.
+<hr style='color:#4d4d4d'>
+Send your questions. Click <a href="mailto:admin@mapsnigeriainitiative.com">Mail Us</a><br>
+
+
+<p style='background:#4d4d4d;padding:10px;color:#fff'> This work is the intellectual property of mapsnigeriainitiative. A public spirited initiative established with the aim of sharing technical information and experience in the area of geospatial data gathering, processing, storage, interpretation and dissemination with the general public.
+<p>
 
 </body>
-<div id='legend' style='position:absolute;bottom:100px;margin-left:70px;border:1px solid black;background:#fff;padding:3px'>
-  <strong>Legend</strong><br>
-male population
-  <nav class='legend clearfix'>
-    <span style='background:#74A9CF;'></span>
-    <span style='background:blue;'></span><br>
-       <label><100000</label>
-       <label>>100000</label><br>
-             <small>Source: National Pop Comm 2006 census</small>
-</div>
 </html>
+
+
+
+
+
 
