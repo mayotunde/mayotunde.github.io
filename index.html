@@ -20,7 +20,7 @@ L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
 
 var style = {fillColor:'#99e6e6', color:'#000', fillOpacity:0.4};
 
-$.getJSON('329lakes.geojson', function(data){   
+$.getJSON('https://cdn.rawgit.com/mayotunde/mayotunde.github.io/master/329lakes.geojson', function(data){   
 L.geoJson(data, {style,                 //Use the L.geoJson function to draw and style the vector layer to the map
 onEachFeature:function(feature, layer)   //Use the onEachfeature function to bind popup display to each feature
 layer.bindPopup(feature.properties.name)
