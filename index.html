@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
 <link rel='shortcut icon' href='https://mapsnigeriainitiative.com/favicon.ico' type='image/icon'/>
-<link rel="stylesheet" href="https://npmcdn.com/leaflet@0.7.7/dist/leaflet.css"/>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.2/dist/leaflet.css"/>
  
 </head>
 <body style='background:#eeeeee;margin-left:30px'>
@@ -20,7 +20,7 @@ Click on the layer control icon and switch off and on layers. Web Cartography of
 <p><a class="w3-btn  w3-orange" href="https://mapsnigeriainitiative.com/register">Click to Register</a></p> 
 
 <div id="map" style="width: 700px;height: 400px;border:2px solid black;margin-left:100px"></div>
-<script src="https://npmcdn.com/leaflet@0.7.7/dist/leaflet.js"></script>
+<script src="https://unpkg.com/leaflet@1.0.2/dist/leaflet.js"></script>
 <script>
 
 var areas2 = new L.LayerGroup();
@@ -60,12 +60,12 @@ L.geoJson(healthcentres, {
 
 var attr = 'Map data &copy; <a href="http://openstreetmap.org">openstreetmap</a>, ' +
       '<a href="https://mapsnigeriainitiative.com">mapsnigeriainitiative</a>, ' +
-      '<a href="http://stamen.com">stamen</a>';
+      '<a href="https://stamen.com">stamen</a>';
 
 
 
-var basemaps = L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {attribution: attr}),
-       gray = L.tileLayer('http://tile.stamen.com/toner/{z}/{x}/{y}.png', {attribution: attr});
+var basemaps = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {attribution: attr}),
+       gray = L.tileLayer('https://tile.stamen.com/toner/{z}/{x}/{y}.png', {attribution: attr});
 
 
 
